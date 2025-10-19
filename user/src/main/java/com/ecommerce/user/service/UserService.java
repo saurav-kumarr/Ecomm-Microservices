@@ -41,17 +41,17 @@ public class UserService {
 
 
 
-    public Optional<UserResponse> fetchUser(Long id) {
+    public Optional<UserResponse> fetchUser(String id) {
 
 
-        return userRepository.findById(id).map(this::mapToUserResponse);
+        return userRepository.findById(String.valueOf(id)).map(this::mapToUserResponse);
                 //.stream().filter(user ->
                 //user.getId().equals(id)).findFirst();
     }
 
-    public boolean updateUser(UserRequest updatedUserRequest, Long id) {
+    public boolean updateUser(UserRequest updatedUserRequest, String id) {
 
-       return userRepository.findById(id).map(existingUser -> {
+       return userRepository.findById(String.valueOf(id)).map(existingUser -> {
           updateUserFromRequest(existingUser, updatedUserRequest);
            userRepository.save(existingUser);
            return true;
