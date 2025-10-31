@@ -1,0 +1,28 @@
+server:
+  port: 8888
+
+spring:
+  application:
+   name: configserver
+
+  profiles:
+   active: native
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+  cloud:
+   config:
+    server:
+     native:
+      search-locations: file:///C:\Users\csaur\Documents\Intellij IDEA_Workspace\SpringBoot_Project\Ecommerce_Microservices\configserver\src\main\resources\config
+
+
+management:
+  endpoints:
+    web:
+     exposure:
+      include: "*"

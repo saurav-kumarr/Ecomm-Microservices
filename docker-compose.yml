@@ -10,7 +10,7 @@ services:
     ports:
       - "3307:3306"
     networks:
-      - my-network
+      - backend
     volumes:
       - mysql_data:/var/lib/mysql
 
@@ -25,7 +25,7 @@ services:
     ports:
       - "8081:80"
     networks:
-      - my-network
+      - backend
 
   ecommerce-app:
     image: sauravkumarr/ecommerce-microservices
@@ -40,13 +40,24 @@ services:
     ports:
       - "8080:8080"   # Expose your app on localhost:8080
     networks:
-      - my-network
+      - backend
 
-
+  rabbitmq:
+    image: rabbitmq:4-management
+    container_name: rabbitmq
+    restart: unless-stopped
+    ports:
+      - "5672:5672"   # RabbitMQ broker port
+      - "15672:15672" # RabbitMQ management UI
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    networks:
+      - backend
 
 
 networks:
-  my-network:
+  backend:
     driver: bridge
 
 volumes:
