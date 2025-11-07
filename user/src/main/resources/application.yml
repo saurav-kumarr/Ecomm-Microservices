@@ -5,6 +5,7 @@ spring:
     import: configserver:http://localhost:8888
 
 
+
 #server.port=8082
 
 #spring.data.mongodb.uri=mongodb://localhost:27017/user_service

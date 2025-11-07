@@ -12,7 +12,7 @@ spring:
 
 #for creating and update schemas and tables
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
       database-platform: org.hibernate.dialect.MySQLDialect
 
   rabbitmq:
@@ -28,3 +28,10 @@ management:
 
 app:
   message: "Hello Product!"
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
