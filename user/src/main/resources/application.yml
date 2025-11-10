@@ -20,3 +20,4 @@ spring:
 #for creating and update schemas and tables
 #spring.jpa.hibernate.ddl-auto=update
 #spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
+
