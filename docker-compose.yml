@@ -1,46 +1,46 @@
 
 services:
-  mysql-db:
-    image: mysql:8.0
-    container_name: mysql-db
-    restart: unless-stopped
-    environment:
-      MYSQL_ROOT_PASSWORD: Rawat@123
-      MYSQL_DATABASE: ecomm_microservices
-    ports:
-      - "3307:3306"
-    networks:
-      - backend
-    volumes:
-      - mysql_data:/var/lib/mysql
+#  mysql-db:
+#    image: mysql:8.0
+#    container_name: mysql-db
+#    restart: unless-stopped
+#    environment:
+#      MYSQL_ROOT_PASSWORD: Rawat@123
+#      MYSQL_DATABASE: ecomm_microservices
+#    ports:
+#      - "3307:3306"
+#    networks:
+#      - backend
+#    volumes:
+#      - mysql_data:/var/lib/mysql
+#
+#  phpmyadmin:
+#    image: phpmyadmin/phpmyadmin
+#    container_name: phpmyadmin
+#    restart: unless-stopped
+#    environment:
+#      PMA_HOST: mysql-db
+#      PMA_USER: root
+#      PMA_PASSWORD: Rawat@123
+#    ports:
+#      - "8081:80"
+#    networks:
+#      - backend
 
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin
-    restart: unless-stopped
-    environment:
-      PMA_HOST: mysql-db
-      PMA_USER: root
-      PMA_PASSWORD: Rawat@123
-    ports:
-      - "8081:80"
-    networks:
-      - backend
-
-  ecommerce-app:
-    image: sauravkumarr/ecommerce-microservices
-    container_name: ecommerce-app
-    restart: unless-stopped
-    depends_on:
-      - mysql-db
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/ecomm_microservices
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: Rawat@123
-    ports:
-      - "8080:8080"   # Expose your app on localhost:8080
-    networks:
-      - backend
+#  ecommerce-app:
+#    image: sauravkumarr/ecommerce-microservices
+#    container_name: ecommerce-app
+#    restart: unless-stopped
+#    depends_on:
+#      - mysql-db
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/ecomm_microservices
+#      SPRING_DATASOURCE_USERNAME: root
+#      SPRING_DATASOURCE_PASSWORD: Rawat@123
+#    ports:
+#      - "8080:8080"   # Expose your app on localhost:8080
+#    networks:
+#      - backend
 
   rabbitmq:
     image: rabbitmq:4-management
@@ -54,11 +54,18 @@ services:
       RABBITMQ_DEFAULT_PASS: guest
     networks:
       - backend
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    ports:
+      - "9411:9411"
+    networks:
+      - backend
 
 
 networks:
   backend:
     driver: bridge
-
-volumes:
-  mysql_data:
+#
+#volumes:
+#  mysql_data:

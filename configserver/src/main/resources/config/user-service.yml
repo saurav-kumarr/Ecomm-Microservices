@@ -28,6 +28,9 @@ management:
   endpoints:
     web.exposure:
       include: "*"
+  tracing:
+    sampling:
+      probability: 1.0
 
 eureka:
   client:
