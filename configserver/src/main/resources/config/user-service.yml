@@ -39,6 +39,9 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
 
+  instance:
+    prefer-ip-address: true
+
 logging:
   file:
     name: logs/${spring.application.name}.log
