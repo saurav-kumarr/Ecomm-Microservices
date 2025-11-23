@@ -25,7 +25,7 @@ public class CartController {
             @RequestBody CartItemRequest request){
        if( !cartService.addToCart(userId, request)){
            return ResponseEntity.badRequest()
-                   .body("Product out of Stock or User not found or Product not found");
+                   .body("Not able to complete the request");
        }
         return ResponseEntity.status(HttpStatus.CREATED).body("Product added successfully");
 
