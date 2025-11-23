@@ -8,6 +8,7 @@ import com.ecommerce.order.dtos.UserResponse;
 import com.ecommerce.order.models.CartItem;
 import com.ecommerce.order.repositories.CartItemRepository;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
@@ -26,7 +27,9 @@ public class CartService {
     private final UserServiceClient userServiceClient;
     //private final UserRepository userRepository;
 
-    @CircuitBreaker(name = "productService", fallbackMethod = "addToCartFallBack")
+
+    //@CircuitBreaker(name = "productService", fallbackMethod = "addToCartFallBack")
+    @Retry(name = "retryBreaker", fallbackMethod = "addToCartFallBack")
     public boolean addToCart(String userId, CartItemRequest request) {
 
         // Look for product
