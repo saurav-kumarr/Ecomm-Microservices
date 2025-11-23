@@ -10,13 +10,16 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 //@Configuration
 public class GatewayConfig {
 
-//        @Bean
+        //@Bean
         public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
             return builder.routes()
                     .route("product-service", r -> r
                             .path("/products/**")
-                            .filters(f -> f.rewritePath("/products(?<segment>/?.*)",
-                                    "/api/products${segment}"))
+                            .filters(f -> f.circuitBreaker(config -> config
+                                    .setName("ecomBreaker")
+                                    .setFallbackUri("forward:/fallback/products")))
+//                            .filters(f -> f.rewritePath("/products(?<segment>/?.*)",
+//                                    "/api/products${segment}"))
                             .uri("lb://PRODUCT-SERVICE"))
 
                     .route("user-service", r -> r
