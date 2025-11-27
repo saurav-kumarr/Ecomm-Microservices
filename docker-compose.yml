@@ -42,18 +42,18 @@ services:
 #    networks:
 #      - backend
 
-  rabbitmq:
-    image: rabbitmq:4-management
-    container_name: rabbitmq
-    restart: unless-stopped
-    ports:
-      - "5672:5672"   # RabbitMQ broker port
-      - "15672:15672" # RabbitMQ management UI
-    environment:
-      RABBITMQ_DEFAULT_USER: guest
-      RABBITMQ_DEFAULT_PASS: guest
-    networks:
-      - backend
+#  rabbitmq:
+#    image: rabbitmq:4-management
+#    container_name: rabbitmq
+#    restart: unless-stopped
+#    ports:
+#      - "5672:5672"   # RabbitMQ broker port
+#      - "15672:15672" # RabbitMQ management UI
+#    environment:
+#      RABBITMQ_DEFAULT_USER: guest
+#      RABBITMQ_DEFAULT_PASS: guest
+#    networks:
+#      - backend
 #  zipkin:
 #    image: openzipkin/zipkin
 #    container_name: zipkin
@@ -61,6 +61,14 @@ services:
 #      - "9411:9411"
 #    networks:
 #      - backend
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - "6379:6379"
+    restart: always
+    networks:
+      - backend
 
 
 networks:
