@@ -10,8 +10,7 @@ spring:
           destination: my-topic
           content-type: application/json
       poller:
-        fixed-delay: 1
-        000
+        fixed-delay: 1000
 
       kafka:
         binder:

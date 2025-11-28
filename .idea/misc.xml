@@ -12,6 +12,7 @@
         <option value="$PROJECT_DIR$/gateway/pom.xml" />
         <option value="$PROJECT_DIR$/notification/pom.xml" />
         <option value="$PROJECT_DIR$/kafka/producer/pom.xml" />
+        <option value="$PROJECT_DIR$/kafka/consumer/pom.xml" />
       </list>
     </option>
   </component>
