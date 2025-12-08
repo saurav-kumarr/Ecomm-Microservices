@@ -70,6 +70,21 @@ services:
     networks:
       - backend
 
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.4.7
+    container_name: keycloak
+    # The 'start-dev' argument goes here
+    command: start-dev
+    # Environment variables from your -e flags
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+    # Port mapping from your -p flag (127.0.0.1 limits access to localhost only)
+    ports:
+      - "8443:8080"
+    networks:
+      - backend
+
 
 networks:
   backend:

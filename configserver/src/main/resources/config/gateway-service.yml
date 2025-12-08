@@ -33,6 +33,11 @@ spring:
               uri: http://localhost:8761
               predicates:
                 - Path=/eureka/**
+  security:
+    oauth2:
+          resourceserver:
+            jwt:
+              issuer-uri: http://localhost:8443/realms/ecom-microservices
 # http://localhost:8080/api/users -> http://localhost:8085/api/users
 logging:
   level:
@@ -56,5 +61,7 @@ management:
 eureka:
   instance:
     prefer-ip-address: true
+
+#SECURITY
 
 
