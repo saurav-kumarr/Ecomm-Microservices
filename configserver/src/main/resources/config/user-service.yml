@@ -51,3 +51,14 @@ logging:
     rollingpolicy:
       max-file-size: 5MB
       max-history: 7
+
+# KEYCLOAK
+
+keycloak:
+  admin:
+    username: user
+    password: Rawat@1234
+    server-url: http://localhost:8443
+    realm: ecom-microservices
+    client-id: admin-cli
+    client-uid: 1fd019da-e2df-4be9-9cc6-91ce3d7ccbf1

@@ -8,3 +8,11 @@
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+
+# This catches .data inside ANY folder named evaluate-loki or evaluate-prometheus
+# regardless of where it is in the project structure.
+**/evaluate-loki/.data/
+**/evaluate-prometheus/.data/
+
+# Ignore logs folder specifically at the root
+/logs/

@@ -20,6 +20,8 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    private final KeyCloakAdminService keyCloakAdminService;
+
     //private Long nextId = 1L;
 
     //private List<User> userList = new ArrayList<>();
@@ -33,8 +35,16 @@ public class UserService {
 
     public void addUser(UserRequest userRequest){
 
+        String token = keyCloakAdminService.getAdminAcessToken();
+        String keycloakUserId = keyCloakAdminService.createUser(token, userRequest);
+
+
         User user = new User();
         updateUserFromRequest(user, userRequest);
+        user.setKeycloakId(keycloakUserId);
+
+        keyCloakAdminService.assignRealmRoleToUser(userRequest.getUsername(),
+                "USER", keycloakUserId);
         userRepository.save(user);
 
     }
@@ -73,6 +83,7 @@ public class UserService {
     private UserResponse mapToUserResponse(User user){
 
         UserResponse response = new UserResponse();
+        response.setKeyCloakId(user.getKeycloakId());
         response.setId(String.valueOf(user.getId()));
         response.setFirstName(user.getFirstName());
         response.setLastName(user.getLastName());
