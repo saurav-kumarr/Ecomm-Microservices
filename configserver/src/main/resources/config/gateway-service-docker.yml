@@ -1,0 +1,73 @@
+server:
+  port: 8080
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: product-service
+
+              uri: lb://PRODUCT-SERVICE
+              predicates:
+                - Path=/api/products/**
+              # For shorting URL. It also be done in GatewayConfig.java
+#                - Path=/products/**
+#              filters:
+#                  - "RewritePath=/products(?<segment>/?.*),/api/products${segment}"
+            - id: user-service
+              uri: lb://USER-SERVICE
+              predicates:
+                - Path=/api/users/**
+            - id: order-service
+              uri: lb://ORDER-SERVICE
+              predicates:
+                - Path=/api/orders/**, /api/cart/**
+            - id: eureka-server
+              uri: http://eureka:8761
+              predicates:
+                - Path=/eureka/main
+              filters:
+                - SetPath=/
+            - id: eureka-server-static
+              uri: http://eureka:8761
+              predicates:
+                - Path=/eureka/**
+  security:
+    oauth2:
+          resourceserver:
+            jwt:
+              issuer-uri: http://keycloak:8080/realms/ecom-microservices
+              jwk-set-uri: http://keycloak:8080/realms/ecom-microservices/protocol/openid-connect/certs
+# http://localhost:8080/api/users -> http://localhost:8085/api/users
+logging:
+  level:
+    root: info
+    org.springframework.cloud.gateway.route.RouteDefinitionLocator: INFO
+    org.springframework.cloud.gateway: TRACE
+
+management:
+  endpoints:
+    web.exposure:
+      include: "*"
+  endpoint:
+    health:
+      show-details: always
+  health:
+    circuitbreakers:
+      enabled: true
+  tracing:
+    sampling:
+      probability: 1.0
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eureka:8761/eureka
+  instance:
+    prefer-ip-address: true
+
+#SECURITY
+
+

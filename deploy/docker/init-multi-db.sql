@@ -1,0 +1,2 @@
+CREATE DATABASE IF NOT EXISTS product_service;
+CREATE DATABASE IF NOT EXISTS order_service;
