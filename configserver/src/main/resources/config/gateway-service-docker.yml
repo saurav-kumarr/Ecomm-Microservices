@@ -37,7 +37,7 @@ spring:
     oauth2:
           resourceserver:
             jwt:
-              issuer-uri: http://keycloak:8080/realms/ecom-microservices
+              issuer-uri: http://localhost:8443/realms/ecom-microservices
               jwk-set-uri: http://keycloak:8080/realms/ecom-microservices/protocol/openid-connect/certs
 # http://localhost:8080/api/users -> http://localhost:8085/api/users
 logging:

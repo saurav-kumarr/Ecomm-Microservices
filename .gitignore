@@ -34,3 +34,5 @@ build/
 deploy/docker/.env
 
 /logs/
+**/evaluate-loki/.data/
+**/evaluate-prometheus/.data/
